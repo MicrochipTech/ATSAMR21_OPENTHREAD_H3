@@ -1,0 +1,14 @@
+configName: FTD
+folderName: CLI_FTD
+format_version: v1.0
+frameworkPath: ..\..\..\..\..\..\..\H3
+processor: ATSAMR21G18A
+projectName: CLI_FTD
+settings:
+  PackageFilter: bsp;classb_pic32mzw1_wfi32e01;core;core_apps_pic32mz_w1;core_apps_sam_d21_da1;crypto;cryptoauthlib;cryptoauthlib_apps;csp;csp_apps_pic32mz_w1;csp_apps_sam_d21_da1;Devices;dev_packs;harmony-services;net;net_apps_pic32mz;quick_docs;usb;wireless_apps_pic32mzw1_wfi32e01;wireless_system_pic32mzw1_wfi32e01;wireless_wifi
+  FORCE_OPTIMIZATION: 'false'
+  GENERATE_BACKUP: 'true'
+  TRUSTZONE: 'false'
+  CMSISPath: .\dev_packs\arm\CMSIS\5.8.0
+  MERGE_STRATEGY: USER_ALL
+  DFPPath: .\dev_packs\Microchip\SAMR21_DFP\2.0.42\atdf\ATSAMR21G18A.atdf

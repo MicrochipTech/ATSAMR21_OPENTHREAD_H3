@@ -1,0 +1,83 @@
+    for(uint8_t i = offset; i < aSize; i++)
+    {
+        rowData[i] = *(uint8_t *)(aData + i);
+    }
+	
+	
+	
+	
+	HandleAddressSolicitResponse
+	
+	VerifyOrExit(aResult == kErrorNone && aMessage != nullptr && aMessageInfo != nullptr)
+	
+	
+	
+	//    char *pszDest = (char *)(rowData + offset);
+//    const char *pszSource =( const char*)aData;
+//    if((pszDest!= NULL) && (pszSource!= NULL))
+//    {
+//        while(aSize) //till cnt
+//        {
+//            //Copy byte by byte
+//            *(pszDest++)= *(pszSource++);
+//            --aSize;
+//        }
+//    }
+
+
+
+    uint8_t rowData[NVMCTRL_FLASH_ROWSIZE];
+    uint32_t addr = mapAddress(aSwapIndex, aOffset);
+    uint32_t rowStartAddr = getRowStartAddr(addr);   
+    uint32_t offset = addr - rowStartAddr;   
+    
+    uint32_t tempOffset = offset;
+    uint32_t remSize = aSize;
+    uint32_t tempSize = 0;
+    uint32_t nextRowIndex = 0;
+    uint32_t nextDataIndex = 0;
+    
+    bool setNext = false;
+    
+    while(remSize)
+    {
+        if((tempOffset + remSize) > NVMCTRL_FLASH_ROWSIZE)
+        {
+            tempSize = NVMCTRL_FLASH_ROWSIZE - tempOffset;
+            setNext = true;
+        }
+        else
+        {
+            tempSize = remSize;
+            remSize = 0;
+        }
+        rowStartAddr += nextRowIndex;
+        aData += nextDataIndex;
+        
+        memset(rowData, 0, sizeof(rowData));
+        
+        NVMCTRL_Read((uint32_t *)rowData, NVMCTRL_FLASH_ROWSIZE, rowStartAddr);
+        while (NVMCTRL_IsBusy());
+        
+        memcpy((rowData + tempOffset) , aData, tempSize);
+        
+        /* Flush the updated data into NVM by pages */
+        for (uint8_t i = 0; i < NVMCTRL_ROW_PAGES; i++)
+        {
+            NVMCTRL_PageBufferWrite((uint32_t *)&(rowData[(i * NVMCTRL_FLASH_PAGESIZE)]), (rowStartAddr + (i * NVMCTRL_FLASH_PAGESIZE)));
+            NVMCTRL_PageBufferCommit((rowStartAddr + (i * NVMCTRL_FLASH_PAGESIZE)));
+            while(NVMCTRL_IsBusy());
+        }
+        if(setNext)
+        {
+            tempOffset = 0;
+            remSize -= tempSize;
+            nextRowIndex += NVMCTRL_FLASH_ROWSIZE;
+            nextDataIndex += tempSize;
+            setNext = false;
+        }
+    }
+	
+	
+	
+	ping -I fe80:0:0:0:e805:e287:e304:4a6b fe80:0:0:0:5c22:850c:2d4b:e00e 30

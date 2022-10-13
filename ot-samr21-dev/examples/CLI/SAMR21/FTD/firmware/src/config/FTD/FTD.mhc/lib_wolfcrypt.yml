@@ -1,0 +1,107 @@
+format_version: v1.0
+type: UniqueComponent
+attributes: {id: lib_wolfcrypt}
+children:
+- type: Symbols
+  children:
+  - type: Boolean
+    attributes: {id: cryptoCrya_03710}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: lib_wolfcrypt, value: 'false'}
+  - type: Boolean
+    attributes: {id: cryptoCrya_U2803}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: lib_wolfcrypt, value: 'false'}
+  - type: Boolean
+    attributes: {id: cryptoCrya_U2805}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: lib_wolfcrypt, value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_asn1}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: lib_wolfcrypt, value: 'false'}
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_ecc}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_hmac}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_md5}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_oaep}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_random}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: lib_wolfcrypt, value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_rsa}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_sha1}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_sha256}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Boolean
+    attributes: {id: wolfcrypt_tdes}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+- type: ElementPosition
+  attributes: {x: '176', y: '223', id: lib_wolfcrypt}
