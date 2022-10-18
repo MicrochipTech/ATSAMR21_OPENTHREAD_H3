@@ -256,7 +256,7 @@ Press `Enter` to see a prompt `>`.
 *Note: the `ipaddr` command should return 3 IPv6 addresses</br>xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx First one corresponds to the Routing Locator (RLOC): this address is created when the device is attached to the network, and is generally not used by applications</br>xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx This one is the Mesh-Local EID (ML-EID): this address is independent of the network topology, and is
 used to communicate with the other interface in the same thread network</br>xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx The last one is the Link-Local Address (LLA): this address starts with fe80::/16 prefix, it is created with the MAC address. It is not used to communicate between nodes. We can still use them between two nodes if there is only a link, one radio transmission, not more than one cable to retransmit the message*
 
-```
+```bash
 > dataset channel 18
 Done
 > dataset networkkey f13b6c20290e6dc620c3eb8bb8916fe5
@@ -299,7 +299,7 @@ Get the Mesh-Local EID address for the FTD Joiner. We're using this address beca
 
 *Note: The `::` specifies the IPv6 Unspecified Address*
 
-```
+```bash
 > udp open
 Done
 > udp bind :: 1234
@@ -311,7 +311,7 @@ Done
 - Open UDP socket
 - Send UDP packet using `udp send <mesh-local ip address> <udp port number> <string>`
 
-```
+```bash
 > udp open
 Done
 > udp send fdbb:48ee:3b7c:d3cf:ab88:3eb:9fa5:ce22 1234 HelloMicrochip
@@ -322,7 +322,7 @@ Done
 
 On Node 2, you should see a print out similar to below:
 
-```
+```bash
 > 14 bytes from fdbb:48ee:3b7c:d3cf:e7e5:8cae:deb2:350c 49153 HelloMicrochip
 ```
 
