@@ -35,7 +35,9 @@ Checkout the <a href="https://microchipsupport.force.com/s/" target="_blank">Tec
 
 ## Introduction<a name="step1"></a>
 
-This application, made for testing purpose, demonstrates how to enable a simple wireless communication between Full Thread Devices (FTD).
+This application, made for testing purpose, demonstrates how to enable a simple wireless communication with a [Full Thread Devices (FTD)](https://openthread.io/guides/thread-primer/node-roles-and-types) over a simple Command Line Interface (CLI).
+
+It is based on [OpenThread for SAM R21](https://github.com/openthread/ot-samr21) implementation ported by the community. More details [here](https://openthread.io/platforms).
 
 Typically, a Full Thread Device (FTD) has always its radio ON, subscribes to the all-routers multicast address, and maintains IPv6 address mappings.
 
@@ -94,7 +96,6 @@ The sample project has been created and tested with the following Software Devel
     - Close and restart MPLAB X IDE
 
 - [MPLAB Code Configurator v5.1.17](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator)
-   - [bsp v3.13.0](https://github.com/Microchip-MPLAB-Harmony/bsp/tree/v3.13.0)
    - [csp v3.11.0](https://github.com/Microchip-MPLAB-Harmony/csp/tree/v3.11.0)
    - [core v3.10.0](https://github.com/Microchip-MPLAB-Harmony/core/tree/v3.10.0)
    - [dev_packs v3.11.2](https://github.com/Microchip-MPLAB-Harmony/dev_packs/tree/v3.11.2)
@@ -205,17 +206,24 @@ Press `Enter` to see a prompt `>`.
 - Bring up the Thread IPv6 interface
 - Start Thread protocol operation
 - Wait few seconds
-- Read the current status of the node. It should be the Leader
+- Read the current state of the node. It should be the Leader
 - View the network configuration and make note of the Network Key which will be used later 
 
-```
->	dataset init new
->	dataset channel 18
->	dataset commit active
->	ifconfig up
->	thread start
->	state
->	dataset
+```bash
+> dataset init new
+Done
+> dataset channel 18
+Done
+> dataset commit active
+Done
+> ifconfig up
+Done
+> thread start
+Done
+> state
+Leader
+> dataset
+...
 ```
 
 #### Node 1 console
@@ -249,13 +257,23 @@ Press `Enter` to see a prompt `>`.
 used to communicate with the other interface in the same thread network</br>xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx The last one is the Link-Local Address (LLA): this address starts with fe80::/16 prefix, it is created with the MAC address. It is not used to communicate between nodes. We can still use them between two nodes if there is only a link, one radio transmission, not more than one cable to retransmit the message*
 
 ```
->	dataset channel 18
->	dataset networkkey f13b6c20290e6dc620c3eb8bb8916fe5
->	dataset commit active
->	ifconfig up
->	thread start
->	state
->	ipaddr
+> dataset channel 18
+Done
+> dataset networkkey f13b6c20290e6dc620c3eb8bb8916fe5
+Done
+> dataset commit active
+Done
+> ifconfig up
+Done
+> thread start
+Done
+> state
+child
+> ipaddr
+fdde:a5c0:c0fe:2e79:0:ff:fe00:ec01
+fdde:a5c0:c0fe:2e79:ab88:3eb:9fa5:ce22
+fe80:0:0:0:6c3b:3194:8bf5:b56f
+Done
 ```
 
 #### Node 2 console
@@ -282,8 +300,10 @@ Get the Mesh-Local EID address for the FTD Joiner. We're using this address beca
 *Note: The `::` specifies the IPv6 Unspecified Address*
 
 ```
-> udp open 
+> udp open
+Done
 > udp bind :: 1234
+Done
 ```
 
 #### Node 1 (leader) commands
@@ -293,7 +313,9 @@ Get the Mesh-Local EID address for the FTD Joiner. We're using this address beca
 
 ```
 > udp open
+Done
 > udp send fdbb:48ee:3b7c:d3cf:ab88:3eb:9fa5:ce22 1234 HelloMicrochip
+Done
 ```
 
 #### Node 2 (child) result
@@ -312,14 +334,16 @@ On Node 2, you should see a print out similar to below:
 
 ### More CLI commands<a name="step8d"></a>
 
-Checkout the [OpenThread CLI Reference](https://github.com/openthread/openthread/blob/main/src/cli/README.md) for all available commands.
+For a list of all available commands, visit [OpenThread CLI Reference README.md][cli]
+
+[cli]: https://github.com/openthread/openthread/blob/main/src/cli/README.md
 
 
 ## Known limitations<a name="step9"></a>
 
 1. This [OpenThread implementation for SAM R21](https://github.com/openthread/ot-samr21) is originally coming from [community ports](https://openthread.io/platforms/community/microchip). The [OpenThread.io](https://openthread.io/platforms#support) website claims these platforms have not been fully tested and may be missing some key functionality.
 
-2. Multiple ping option are disabled.
+2. Multiple ping option is disabled.
 
 
 
